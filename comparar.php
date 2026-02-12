@@ -1,7 +1,11 @@
 <?php
 /**
- * Comparison Tool
- * Aurora Design
+ * Página de comparación de dos países.
+ * 
+ * Compara estadísticas lado a lado.
+ * 
+ * @author Francisco Javier Bailón García
+ * @version 1.0
  */
 require_once 'functions.php';
 
@@ -23,17 +27,17 @@ if (isset($_GET['pais1']) && isset($_GET['pais2'])) {
         if ($res2 && !empty($res2)) $pais2 = $res2[0];
 
         if (!$pais1 || !$pais2) {
-            $error = "One or both countries could not be found.";
+            $error = "No se encontraron uno o ambos países.";
         }
     }
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compare — WorldExplorer</title>
+    <title>Comparar — WorldExplorer</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -43,32 +47,32 @@ if (isset($_GET['pais1']) && isset($_GET['pais2'])) {
                 <span>✦</span> WorldExplorer
             </div>
             <nav>
-                <a href="index.php">Home</a>
-                <a href="buscar.php">Search</a>
-                <a href="listado.php">Global Atlas</a>
-                <a href="comparar.php" class="active">Compare</a>
-                <a href="regiones.php">Regions</a>
+                <a href="index.php">Inicio</a>
+                <a href="buscar.php">Buscar</a>
+                <a href="listado.php">Listado</a>
+                <a href="comparar.php" class="active">Comparar</a>
+                <a href="regiones.php">Regiones</a>
             </nav>
         </div>
     </header>
 
     <main class="container">
         <section class="hero" style="padding-bottom: 20px;">
-            <h2>Compare Nations</h2>
-            <p>Analyze differences in demographics and geography.</p>
+            <h2>Comparar Países</h2>
+            <p>Analiza las diferencias demográficas y geográficas entre dos naciones.</p>
         </section>
 
         <form action="comparar.php" method="GET" class="compare-form-container">
             <div class="form-row">
                 <div class="form-group">
-                    <label>First Nation</label>
-                    <input type="text" name="pais1" class="form-input" placeholder="e.g. Germany" value="<?php echo $nombre1; ?>" required>
+                    <label>Primer País</label>
+                    <input type="text" name="pais1" class="form-input" placeholder="Ej: Spain" value="<?php echo $nombre1; ?>" required>
                 </div>
                 <div class="form-group">
-                    <label>Second Nation</label>
-                    <input type="text" name="pais2" class="form-input" placeholder="e.g. Italy" value="<?php echo $nombre2; ?>" required>
+                    <label>Segundo País</label>
+                    <input type="text" name="pais2" class="form-input" placeholder="Ej: France" value="<?php echo $nombre2; ?>" required>
                 </div>
-                <button type="submit" class="btn-search" style="margin-bottom:2px;">Run Comparison</button>
+                <button type="submit" class="btn-search" style="margin-bottom:2px;">Comparar</button>
             </div>
         </form>
 
@@ -79,7 +83,7 @@ if (isset($_GET['pais1']) && isset($_GET['pais2'])) {
         <?php if ($pais1 && $pais2): ?>
             <div class="compare-result">
                 <div class="country-item" style="text-align:center; padding-bottom:20px;">
-                    <img src="<?php echo $pais1['flags']['png'] ?? ''; ?>" alt="Flag 1" class="country-flag" style="height:200px; border-radius: 24px 24px 0 0;">
+                    <img src="<?php echo $pais1['flags']['png'] ?? ''; ?>" alt="Bandera" class="country-flag" style="height:200px; border-radius: 24px 24px 0 0;">
                     <h3 style="margin-top:20px; font-size:1.8rem;"><?php echo nombreEspanol($pais1); ?></h3>
                     <p style="color:var(--accent-cyan);"><?php echo obtenerCapital($pais1); ?></p>
                 </div>
@@ -87,7 +91,7 @@ if (isset($_GET['pais1']) && isset($_GET['pais2'])) {
                 <div class="versus-circle">VS</div>
 
                 <div class="country-item" style="text-align:center; padding-bottom:20px;">
-                    <img src="<?php echo $pais2['flags']['png'] ?? ''; ?>" alt="Flag 2" class="country-flag" style="height:200px; border-radius: 24px 24px 0 0;">
+                    <img src="<?php echo $pais2['flags']['png'] ?? ''; ?>" alt="Bandera" class="country-flag" style="height:200px; border-radius: 24px 24px 0 0;">
                     <h3 style="margin-top:20px; font-size:1.8rem;"><?php echo nombreEspanol($pais2); ?></h3>
                     <p style="color:var(--accent-purple);"><?php echo obtenerCapital($pais2); ?></p>
                 </div>
@@ -95,7 +99,7 @@ if (isset($_GET['pais1']) && isset($_GET['pais2'])) {
 
             <div class="stats-grid" style="margin-top:60px;">
                 <div class="stat-box" style="text-align:center;">
-                    <div class="stat-label">Population</div>
+                    <div class="stat-label">Población</div>
                     <div style="display:flex; justify-content:space-between; margin-top:10px;">
                         <span style="font-size:1.1rem;"><?php echo formatearNumero($pais1['population'] ?? 0); ?></span>
                         <span style="font-size:1.1rem;"><?php echo formatearNumero($pais2['population'] ?? 0); ?></span>
@@ -112,7 +116,7 @@ if (isset($_GET['pais1']) && isset($_GET['pais2'])) {
                 </div>
 
                 <div class="stat-box" style="text-align:center;">
-                    <div class="stat-label">Land Area (km²)</div>
+                    <div class="stat-label">Superficie (km²)</div>
                     <div style="display:flex; justify-content:space-between; margin-top:10px;">
                         <span style="font-size:1.1rem;"><?php echo formatearNumero((int)($pais1['area'] ?? 0)); ?></span>
                         <span style="font-size:1.1rem;"><?php echo formatearNumero((int)($pais2['area'] ?? 0)); ?></span>
@@ -129,7 +133,7 @@ if (isset($_GET['pais1']) && isset($_GET['pais2'])) {
                 </div>
 
                 <div class="stat-box" style="text-align:center;">
-                    <div class="stat-label">Region</div>
+                    <div class="stat-label">Región</div>
                     <div style="display:flex; justify-content:space-between; margin-top:10px; font-weight:600;">
                         <span style="color:var(--accent-cyan);"><?php echo traducirRegion($pais1['region'] ?? ''); ?></span>
                         <span style="color:var(--accent-purple);"><?php echo traducirRegion($pais2['region'] ?? ''); ?></span>
@@ -140,7 +144,7 @@ if (isset($_GET['pais1']) && isset($_GET['pais2'])) {
     </main>
 
     <footer>
-        <p>WorldExplorer Project — <?php echo date('Y'); ?></p>
+        <p>WorldExplorer — Tarea 9 DEWS — <?php echo date('Y'); ?></p>
     </footer>
 </body>
 </html>

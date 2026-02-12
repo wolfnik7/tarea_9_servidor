@@ -1,7 +1,11 @@
 <?php
 /**
- * Global Atlas
- * Aurora Design
+ * Página de listado de países con paginación.
+ * 
+ * Muestra todos los países usando cURL.
+ * 
+ * @author Francisco Javier Bailón García
+ * @version 1.0
  */
 require_once 'functions.php';
 
@@ -12,7 +16,7 @@ $todos = obtenerTodos();
 $error = '';
 
 if ($todos === null) {
-    $error = "Unable to fetch global data.";
+    $error = "No se pudieron cargar los datos.";
     $todos = [];
 }
 
@@ -27,11 +31,11 @@ $offset = ($paginaActual - 1) * $porPagina;
 $paisesPagina = array_slice($todos, $offset, $porPagina);
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atlas — WorldExplorer</title>
+    <title>Listado — WorldExplorer</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -41,19 +45,19 @@ $paisesPagina = array_slice($todos, $offset, $porPagina);
                 <span>✦</span> WorldExplorer
             </div>
             <nav>
-                <a href="index.php">Home</a>
-                <a href="buscar.php">Search</a>
-                <a href="listado.php" class="active">Discover</a>
-                <a href="comparar.php">Compare</a>
-                <a href="regiones.php">Regions</a>
+                <a href="index.php">Inicio</a>
+                <a href="buscar.php">Buscar</a>
+                <a href="listado.php" class="active">Listado</a>
+                <a href="comparar.php">Comparar</a>
+                <a href="regiones.php">Regiones</a>
             </nav>
         </div>
     </header>
 
     <main class="container">
         <section class="hero" style="padding-bottom: 20px;">
-            <h2>The Global Atlas</h2>
-            <p>A comprehensive directory of <?php echo $totalPaises; ?> nations.</p>
+            <h2>Atlas Global</h2>
+            <p>Directorio completo de <?php echo $totalPaises; ?> naciones del mundo.</p>
         </section>
 
         <?php if ($error): ?>
@@ -62,15 +66,15 @@ $paisesPagina = array_slice($todos, $offset, $porPagina);
 
         <?php if (!empty($paisesPagina)): ?>
             <p style="text-align:center; color:var(--text-secondary); margin-bottom:40px;">
-                Page <?php echo $paginaActual; ?> of <?php echo $totalPaginas; ?>
+                Página <?php echo $paginaActual; ?> de <?php echo $totalPaginas; ?>
             </p>
 
             <div class="country-grid">
                 <?php foreach ($paisesPagina as $pais): ?>
                     <a href="detalle.php?code=<?php echo $pais['cca2'] ?? ''; ?>" class="country-item">
-                        <img src="<?php echo $pais['flags']['png'] ?? ''; ?>" alt="Flag" class="country-flag">
+                        <img src="<?php echo $pais['flags']['png'] ?? ''; ?>" alt="Bandera" class="country-flag">
                         <div class="country-info">
-                            <h3 style="font-size:1.2rem;"><?php echo $pais['name']['common'] ?? 'Unknown'; ?></h3>
+                            <h3 style="font-size:1.2rem;"><?php echo $pais['name']['common'] ?? 'Desconocido'; ?></h3>
                             <div class="country-details">
                                 <span style="font-weight:600;color:var(--text-main);"><?php echo traducirRegion($pais['region'] ?? ''); ?></span>
                                 <span><?php echo implode(', ', array_slice($pais['capital'] ?? [], 0, 1)); ?></span>
@@ -101,7 +105,7 @@ $paisesPagina = array_slice($todos, $offset, $porPagina);
     </main>
 
     <footer>
-        <p>WorldExplorer Project — <?php echo date('Y'); ?></p>
+        <p>WorldExplorer — Tarea 9 DEWS — <?php echo date('Y'); ?></p>
     </footer>
 </body>
 </html>

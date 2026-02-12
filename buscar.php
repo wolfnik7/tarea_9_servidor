@@ -1,7 +1,11 @@
 <?php
 /**
- * Search Page
- * Aurora Design
+ * Página de búsqueda de países.
+ * 
+ * Busca países por nombre usando file_get_contents().
+ * 
+ * @author Francisco Javier Bailón García
+ * @version 1.0
  */
 require_once 'functions.php';
 
@@ -13,16 +17,16 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
     $busqueda = htmlspecialchars(trim($_GET['q']));
     $resultados = buscarPais($busqueda);
     if ($resultados === null) {
-        $error = "No matches found for \"$busqueda\".";
+        $error = "No se encontraron resultados para \"$busqueda\".";
     }
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search — WorldExplorer</title>
+    <title>Buscar — WorldExplorer</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -32,25 +36,25 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
                 <span>✦</span> WorldExplorer
             </div>
             <nav>
-                <a href="index.php">Home</a>
-                <a href="buscar.php" class="active">Search</a>
-                <a href="listado.php">Discover</a>
-                <a href="comparar.php">Compare</a>
-                <a href="regiones.php">Regions</a>
+                <a href="index.php">Inicio</a>
+                <a href="buscar.php" class="active">Buscar</a>
+                <a href="listado.php">Listado</a>
+                <a href="comparar.php">Comparar</a>
+                <a href="regiones.php">Regiones</a>
             </nav>
         </div>
     </header>
 
     <main class="container">
         <section class="hero" style="padding-bottom: 20px;">
-            <h2>Find a Nation</h2>
-            <p>Access government, demographic, and geographic data instantly.</p>
+            <h2>Buscar País</h2>
+            <p>Accede a datos demográficos, geográficos y gubernamentales al instante.</p>
         </section>
 
         <form action="buscar.php" method="GET" class="search-container">
-            <input type="text" name="q" placeholder="Type a country name (e.g. Japan, Canada)..." 
+            <input type="text" name="q" placeholder="Escribe el nombre de un país (ej: Japan, France)..." 
                    value="<?php echo $busqueda; ?>" autocomplete="off" required>
-            <button type="submit" class="btn-search">Search</button>
+            <button type="submit" class="btn-search">Buscar</button>
         </form>
 
         <?php if ($error): ?>
@@ -58,17 +62,17 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
         <?php endif; ?>
 
         <?php if ($resultados): ?>
-            <p style="text-align:center; color:var(--text-secondary); margin-bottom:40px;">Found <?php echo count($resultados); ?> result(s)</p>
+            <p style="text-align:center; color:var(--text-secondary); margin-bottom:40px;">Se encontraron <?php echo count($resultados); ?> resultado(s)</p>
             <div class="country-grid">
                 <?php foreach ($resultados as $pais): ?>
                     <a href="detalle.php?code=<?php echo $pais['cca2'] ?? ''; ?>" class="country-item">
-                        <img src="<?php echo $pais['flags']['png'] ?? ''; ?>" alt="Flag" class="country-flag">
+                        <img src="<?php echo $pais['flags']['png'] ?? ''; ?>" alt="Bandera" class="country-flag">
                         <div class="country-info">
                             <span class="tag"><?php echo traducirRegion($pais['region'] ?? ''); ?></span>
                             <h3><?php echo nombreEspanol($pais); ?></h3>
                             <div class="country-details">
                                 <span><?php echo obtenerCapital($pais); ?></span>
-                                <span><?php echo formatearNumero($pais['population'] ?? 0); ?> Inhabitants</span>
+                                <span><?php echo formatearNumero($pais['population'] ?? 0); ?> habitantes</span>
                             </div>
                         </div>
                     </a>
@@ -78,7 +82,7 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
     </main>
 
     <footer>
-        <p>WorldExplorer Project — <?php echo date('Y'); ?></p>
+        <p>WorldExplorer — Tarea 9 DEWS — <?php echo date('Y'); ?></p>
     </footer>
 </body>
 </html>

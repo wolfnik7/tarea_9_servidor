@@ -1,16 +1,18 @@
 <?php
 /**
- * WorldExplorer — Aurora Edition
- * Main Gateway
+ * WorldExplorer — Página principal
+ * 
+ * @author Francisco Javier Bailón García
+ * @version 1.0
  */
 require_once 'functions.php';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WorldExplorer — Aurora Edition</title>
+    <title>WorldExplorer — Explorador de Países</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -20,54 +22,54 @@ require_once 'functions.php';
                 <span>✦</span> WorldExplorer
             </div>
             <nav>
-                <a href="index.php" class="active">Home</a>
-                <a href="buscar.php">Search</a>
-                <a href="listado.php">Discover</a>
-                <a href="comparar.php">Compare</a>
-                <a href="regiones.php">Regions</a>
+                <a href="index.php" class="active">Inicio</a>
+                <a href="buscar.php">Buscar</a>
+                <a href="listado.php">Listado</a>
+                <a href="comparar.php">Comparar</a>
+                <a href="regiones.php">Regiones</a>
             </nav>
         </div>
     </header>
 
     <main class="container">
         <section class="hero">
-            <h2>Explore the Planet.<br>Discover the Details.</h2>
-            <p>Your premium gateway to global data. Navigate through countries, regions, and statistics with a futuristic interface designed for clarity.</p>
+            <h2>Explora el Planeta.<br>Descubre cada Detalle.</h2>
+            <p>Tu puerta de acceso a datos de todos los países del mundo. Navega entre naciones, regiones y estadísticas con una interfaz moderna y visual.</p>
         </section>
 
         <section class="sections-grid">
             <a href="buscar.php" class="section-card">
                 <div class="card-icon">🔍</div>
-                <h3>Quick Search</h3>
-                <p>Instantly find comprehensive data about any nation. Populations, capitals, currencies, and languages at your fingertips.</p>
+                <h3>Búsqueda Rápida</h3>
+                <p>Encuentra al instante datos completos de cualquier nación. Población, capital, moneda e idiomas a un clic.</p>
                 <div class="card-arrow">→</div>
             </a>
 
             <a href="listado.php" class="section-card">
                 <div class="card-icon">🗺️</div>
-                <h3>Global Atlas</h3>
-                <p>Browse the complete archive of all sovereign states. A digital encyclopedia of the world's geography.</p>
+                <h3>Atlas Global</h3>
+                <p>Recorre el archivo completo de todos los estados soberanos. Una enciclopedia digital de la geografía mundial.</p>
                 <div class="card-arrow">→</div>
             </a>
 
             <a href="comparar.php" class="section-card">
                 <div class="card-icon">⚖️</div>
-                <h3>Compare Nations</h3>
-                <p>Side-by-side analysis. Visualize economic and demographic differences between any two countries.</p>
+                <h3>Comparar Países</h3>
+                <p>Análisis lado a lado. Visualiza las diferencias demográficas y geográficas entre dos países.</p>
                 <div class="card-arrow">→</div>
             </a>
 
             <a href="regiones.php" class="section-card">
                 <div class="card-icon">🌐</div>
-                <h3>Regional Zones</h3>
-                <p>Filter by continent. Explore the unique characteristics of Europe, Asia, Americas, Africa, and Oceania.</p>
+                <h3>Zonas Regionales</h3>
+                <p>Filtra por continente. Explora las características de Europa, Asia, Américas, África y Oceanía.</p>
                 <div class="card-arrow">→</div>
             </a>
         </section>
     </main>
 
     <footer>
-        <p>WorldExplorer Project — <?php echo date('Y'); ?> — Designed for Exploration</p>
+        <p>WorldExplorer — Tarea 9 DEWS — <?php echo date('Y'); ?></p>
     </footer>
 </body>
 </html>
